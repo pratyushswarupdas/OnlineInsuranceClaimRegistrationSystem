@@ -15,15 +15,12 @@ public class PolicyDetails {
 	@Column(name="QUESTIONID")
 	private int questionId;
 	
-	@Column(name="ANSWER")
-	private String answer;
 	
 	//CONSTRUCTORS
-	public PolicyDetails(long policyNumber, int questionId, String answer) {
+	public PolicyDetails(long policyNumber, int questionId) {
 		super();
 		this.policyNumber = policyNumber;
 		this.questionId = questionId;
-		this.answer = answer;
 	}
 
 	public PolicyDetails() {
@@ -47,19 +44,12 @@ public class PolicyDetails {
 		this.questionId = questionId;
 	}
 
-	public String getAnswer() {
-		return answer;
-	}
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
 	
 	//TOSTRING
 	@Override
 	public String toString() {
-		return "\n PolicyDetails [policyNumber=" + policyNumber + ", questionId=" + questionId + ", answer=" + answer
-				+ "]";
+		return "\n PolicyDetails [policyNumber=" + policyNumber + ", questionId=" + questionId +"]";
 	}
 	
 	
