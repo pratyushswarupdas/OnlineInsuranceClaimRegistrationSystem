@@ -1,5 +1,7 @@
 package com.capgemini.claim.user;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.capgemini.claim.bean.Claim;
@@ -63,7 +65,13 @@ public class UserApp {
 								case 2:	policyDao.viewPolicy(user);
 										break;
 										
-								case 3: 
+								case 3: try {
+											System.out.println(claimDao.viewReport(user).toString());
+											} 
+											catch (SQLException e) 
+											{
+												e.printStackTrace();
+											}
 										break;
 									
 								default:System.out.println("Wrong Input");
@@ -88,8 +96,14 @@ public class UserApp {
 								case 2:	policyDao.viewPolicy(user);
 										break;
 										
-								case 3: 
-										break;
+								case 3: try {
+									System.out.println(claimDao.viewReport(user).toString());
+									} 
+									catch (SQLException e) 
+									{
+										e.printStackTrace();
+									}
+								break;
 								
 								default:System.out.println("Wrong Input");
 								break;

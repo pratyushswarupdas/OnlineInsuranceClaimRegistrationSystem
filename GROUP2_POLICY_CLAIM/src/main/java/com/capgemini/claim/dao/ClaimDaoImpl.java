@@ -1,5 +1,7 @@
 package com.capgemini.claim.dao;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -335,5 +337,59 @@ public class ClaimDaoImpl implements ClaimDao {
 		
 		
 	}
+	
+	//view report OR view claim
+	
+	  public List<Claim> viewReport(User user)throws SQLException
+	  {
+			
+		  AccountDao accdao = new AccountDaoImpl();
+		  List<Claim> claimList=new ArrayList<>();
+		  List<Long> policyList=new ArrayList<>();
+		  switch(user.getRoleCode()) {
+	  
+		  case 1:
+			  	//insureduser//
+			  	policyList=accdao.getPolicyByInsuredName(user.getUserName());
+			  	
+			  	for(Long plList : policyList)
+			  	{
+			  			
+			  		String qStr = "SELECT c FROM Claim c WHERE c.policyNumber=:pnumber";
+					TypedQuery<Claim> query = em.createQuery(qStr, Claim.class);
+					query.setParameter("pnumber", plList); 
+					claimList=query.getResultList();
+			  		
+			  	}
+			  	break;
+			  	
+	 
+	  
+		  case 2: //agent
+			  	policyList=accdao.getPolicyByUserName(user.getUserName());
+			  	
+			  	for(Long plList : policyList)
+			  	{
+			  			
+			  		String qStr = "SELECT c FROM Claim c WHERE c.policyNumber=:pnumber";
+					TypedQuery<Claim> query = em.createQuery(qStr, Claim.class);
+					query.setParameter("pnumber", plList); 
+					claimList=query.getResultList();
+			  		
+			  	}
+			  	break;
+	  
+		  case 3:
+			  	//
+			  	String qStr = "SELECT c FROM Claim c";
+			  	TypedQuery<Claim> query = em.createQuery(qStr, Claim.class);
+			  	claimList=query.getResultList();
+			  	break;
+		  
+		  }
+		  return claimList;
+	  
+	  }
+	 
 
 }

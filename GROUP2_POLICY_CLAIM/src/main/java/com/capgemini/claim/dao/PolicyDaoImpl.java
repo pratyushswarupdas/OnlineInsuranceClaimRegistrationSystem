@@ -126,23 +126,5 @@ public class PolicyDaoImpl implements PolicyDao {
 		
 	}
 	
-	//view report OR view claim
-	/*
-	 * public List<Claim> viewReport(User user)throws SQLException,
-	 * ClassNotFoundException, IOException {
-	 * 
-	 * switch(user.getRoleCode()) {
-	 * 
-	 * case 1:
-	 * 
-	 * //insureduser//
-	 * 
-	 * case 2: //agent
-	 * 
-	 * case 3:
-	 * 
-	 * }
-	 * 
-	 * }
-	 */
+
 }
