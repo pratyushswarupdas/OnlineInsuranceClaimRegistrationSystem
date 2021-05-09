@@ -1,5 +1,4 @@
 	package com.capgemini.claim.user;
-//hello aliens
 import com.capgemini.claim.bean.User;
 import com.capgemini.claim.dao.AccountDao;
 import com.capgemini.claim.dao.AccountDaoImpl;
