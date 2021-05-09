@@ -33,11 +33,12 @@ public class Account {
 	public Account() {
 		super();
 	}
-	
-	public Account(long accountNumber, String userName) {
+
+	public Account(long accountNumber, String userName, String insuredName) {
 		super();
 		this.accountNumber = accountNumber;
 		this.userName = userName;
+		this.insuredName = insuredName;
 	}
 
 	//GETTER & SETTERS

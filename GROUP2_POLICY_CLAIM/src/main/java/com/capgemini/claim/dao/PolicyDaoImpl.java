@@ -1,5 +1,6 @@
 package com.capgemini.claim.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import com.capgemini.claim.bean.Account;
+import com.capgemini.claim.bean.Claim;
 import com.capgemini.claim.bean.Policy;
 import com.capgemini.claim.bean.PolicyDetails;
 import com.capgemini.claim.bean.User;
@@ -16,6 +18,7 @@ import com.capgemini.jpautil.JPAUtil;
 public class PolicyDaoImpl implements PolicyDao {
 	
 	private EntityManager em = JPAUtil.getEntityManager();
+	AccountDao accDao=new AccountDaoImpl();
 	Scanner sc=new Scanner(System.in);
 	
 	
@@ -122,5 +125,24 @@ public class PolicyDaoImpl implements PolicyDao {
 		
 		
 	}
-
+	
+	//view report OR view claim
+	/*
+	 * public List<Claim> viewReport(User user)throws SQLException,
+	 * ClassNotFoundException, IOException {
+	 * 
+	 * switch(user.getRoleCode()) {
+	 * 
+	 * case 1:
+	 * 
+	 * //insureduser
+	 * 
+	 * case 2: //agent
+	 * 
+	 * case 3:
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 }
