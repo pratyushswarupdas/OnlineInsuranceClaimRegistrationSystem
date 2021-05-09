@@ -135,7 +135,7 @@ public class PolicyDaoImpl implements PolicyDao {
 	 * 
 	 * case 1:
 	 * 
-	 * //insureduser
+	 * //insureduser//
 	 * 
 	 * case 2: //agent
 	 * 
