@@ -222,9 +222,8 @@ public class ImplClaimService implements IClaimService {
 				allPolicyNumberList=query.getResultList();
 				if(allPolicyNumberList == null) 
 				{
-					System.out.println("allPolicyNumberList is empty");
 					sc.close();
-					throw new CustomException();
+					throw new CustomException("All Policy Number List Is Empty");
 				}
 
 				if (allPolicyNumberList!= null)

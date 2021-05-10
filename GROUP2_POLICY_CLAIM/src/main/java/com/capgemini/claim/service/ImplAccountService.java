@@ -14,10 +14,10 @@ import com.capgemini.jpautil.JPAUtil;
 import com.capgemini.claim.dao.AccountDao;
 import com.capgemini.claim.dao.AccountDaoImpl;
 
-
 public class ImplAccountService implements IAccountService {
 	private EntityManager em = JPAUtil.getEntityManager();
-	Scanner sc=new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
+
 	@Override
 	public List<Long> getPolicyByUserName(String username) {
 
@@ -33,12 +33,13 @@ public class ImplAccountService implements IAccountService {
 			String qStr = "SELECT p.policyNumber FROM Policy p WHERE p.accountNumber=:accNo";
 			TypedQuery<Long> qr = em.createQuery(qStr, Long.class);
 			qr.setParameter("accNo", accNo.getAccountNumber());
-			polList=qr.getResultList();
+			polList = qr.getResultList();
 
 		}
 		// System.out.println(polList);
 		return polList;
 	}
+
 	@Override
 	public List<Long> getPolicyByInsuredName(String insuredName) {
 
@@ -54,36 +55,32 @@ public class ImplAccountService implements IAccountService {
 			String qStr = "SELECT p.policyNumber FROM Policy p WHERE p.accountNumber=:accNo";
 			TypedQuery<Long> qr = em.createQuery(qStr, Long.class);
 			qr.setParameter("accNo", accNo.getAccountNumber());
-			polList=qr.getResultList();
+			polList = qr.getResultList();
 
 		}
 		// System.out.println(polList);
 		return polList;
 	}
+
 	@Override
-	public void createAccount(User user,Account a) throws CustomException
-	{
-		AccountDao ad=new AccountDaoImpl();
-		
+	public void createAccount(User user, Account a) throws CustomException {
+		AccountDao ad = new AccountDaoImpl();
+
 		User checkTempInsuredUser;
-		
+
+		try {
 			checkTempInsuredUser = em.find(User.class, a.getInsuredName());
-			
-			if(checkTempInsuredUser == null) {
-				System.out.println("User do not exist");
-			}
-			else if(checkTempInsuredUser.getUserName()== a.getInsuredName()) {
+
+			if (checkTempInsuredUser.getUserName() == a.getInsuredName()) {
 				ad.createAccount(a);
 			}
-			else
-			{
-				throw new CustomException();
-			}
-			
 
-		
-		
+		}
+
+		catch (Exception e) {
+			throw new CustomException("User does not exist");
+		}
+
 	}
-	
 
 }

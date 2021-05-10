@@ -29,17 +29,13 @@ public class ImplUserService implements IUserService {
 		
 		if(u == null) 
 		{
-			
 			userDao.profileCreation(user);
 		
 			System.out.println("User created");
-			
 		}
 		else
 		{
 			throw new CustomException("User Already Exist");
-		
-			//return "User Already Exist";
 		}
 		
 	}
