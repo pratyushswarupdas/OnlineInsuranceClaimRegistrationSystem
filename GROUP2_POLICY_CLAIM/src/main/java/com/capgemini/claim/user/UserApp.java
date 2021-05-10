@@ -108,15 +108,17 @@ public class UserApp {
 		            	}
 	                    break;
 	                    
-	            case 3: try 
-	                    {
-	                        System.out.println(claimService.viewReport(user));
-	                    } 
-	                    catch (SQLException e) 
-	                    {
-	                        e.printStackTrace();
-	                    }
-	                    break;
+	            case 3: //view Claim
+		            	try 
+	            		{
+	            			System.out.println(claimService.viewReport(user));                                      
+	            		} 
+	            		catch (SQLException e) 
+	            		{
+	            			e.getMessage();
+	            		}
+	            		break;
+	                    
 	                
 	            default:System.out.println("Wrong Input");
 	            break;
@@ -185,13 +187,14 @@ public class UserApp {
 	            		} 
 	            		catch (SQLException e) 
 	            		{
-	            			e.printStackTrace();
+	            			e.getMessage();
 	            		}
 	            		break;
 	                   
 	            
-	            default:System.out.println("Wrong Input");
-	            break;
+	            default:
+	            		System.out.println("Wrong Input");
+	            		break;
 	        }	
 	        System.out.println("Do You Wish To See The Menu Place Again(yes/no)");
 			ch=sc.next();
