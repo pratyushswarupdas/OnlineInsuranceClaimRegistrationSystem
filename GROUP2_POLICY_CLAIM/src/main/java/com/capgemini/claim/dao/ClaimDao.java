@@ -9,6 +9,6 @@ import com.capgemini.claim.bean.User;
 
 public interface ClaimDao {
 
-	public abstract void claimCreation(User user);
+	public abstract void claimCreation(Claim claim);
 	public abstract List<Claim> viewReport(User user) throws SQLException;
 }
