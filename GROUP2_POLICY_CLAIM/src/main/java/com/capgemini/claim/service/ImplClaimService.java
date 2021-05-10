@@ -34,9 +34,8 @@ public class ImplClaimService implements IClaimService {
 		PolicyDetails policyDetailslist = new PolicyDetails();
 		int qId = 0;
 		int answer;
+		int temp=0;
 		
-		em.getTransaction().begin();
-
 		//Entering and checking for Policy Details
 		System.out.println("Enter Policy Number");
 		long policyNumber = sc.nextLong();
@@ -121,20 +120,13 @@ public class ImplClaimService implements IClaimService {
 	
 							claimDao.claimCreation(claim);
 							System.out.println("Claim Request Initiated");
-			
+							temp=1;
 						}
-						else
-						{
-							System.out.println("Wrong Policy Number");
-						}
+						
 					}
 					
-					
 				}
-				else
-				{
-					System.out.println("User Has No Policy To Claim");
-				}
+				
 				break;
 			
 		case 2:
@@ -214,19 +206,10 @@ public class ImplClaimService implements IClaimService {
 	
 							claimDao.claimCreation(claim);
 							System.out.println("Claim Request Initiated");
-			
+							temp=1;							
 						}
-						else
-						{
-							System.out.println("Wrong Policy Number");
-						}
+						
 					}
-					
-					
-				}
-				else
-				{
-					System.out.println("User Has No Policy To Claim");
 				}
 				break;
 			
@@ -312,24 +295,22 @@ public class ImplClaimService implements IClaimService {
 	
 							claimDao.claimCreation(claim);
 							System.out.println("Claim Request Initiated");
+							temp=1;
 			
 						}
-						else
-						{
-							System.out.println("Wrong Policy Number");
-						}
+
 					}
 					
-					
 				}
-				else
-				{
-					System.out.println("User Has No Policy To Claim");
-				}
+				
 				break;
 			
 		}
 		
+		if(temp==0)
+		{
+			System.out.println("Policy Not Found");;
+		}
 		sc.close();
 		
 	}

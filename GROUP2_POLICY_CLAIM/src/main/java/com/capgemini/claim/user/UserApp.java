@@ -1,16 +1,16 @@
 package com.capgemini.claim.user;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 import com.capgemini.claim.bean.User;
-import com.capgemini.claim.dao.ClaimDao;
-import com.capgemini.claim.dao.ClaimDaoImpl;
-import com.capgemini.claim.dao.PolicyDetailsDao;
+
 import com.capgemini.claim.dao.PolicyDao;
 import com.capgemini.claim.dao.PolicyDaoImpl;
-import com.capgemini.claim.dao.PolicyDetailsDaoImpl;
 import com.capgemini.claim.dao.UserDao;
 import com.capgemini.claim.dao.UserDaoImpl;
+import com.capgemini.claim.service.IClaimService;
 import com.capgemini.claim.service.IUserService;
+import com.capgemini.claim.service.ImplClaimService;
 import com.capgemini.claim.service.ImplUserService;
 
 public class UserApp {
@@ -22,10 +22,9 @@ public class UserApp {
 	public static void main(String[] args) {
 		
 		UserDao userDao=new UserDaoImpl();
-		ClaimDao claimDao=new ClaimDaoImpl();
 		PolicyDao policyDao=new PolicyDaoImpl();
-		PolicyDetailsDao policydetailsDao=new PolicyDetailsDaoImpl();
 		IUserService userService=new ImplUserService();
+		IClaimService claimService=new ImplClaimService();
 		
 	
 		String ch="yes";
@@ -53,14 +52,21 @@ public class UserApp {
 							switch(ans)
 							{
 								case 1:	//Claim Creation
-										claimDao.claimCreation(user);
+										claimService.claimCreation(user);
 						
 										break;
 								
 								case 2:	policyDao.viewPolicy(user);
 										break;
 										
-								case 3: 
+								case 3: try 
+										{
+											System.out.println(claimService.viewReport(user));
+										} 
+										catch (SQLException e) 
+										{
+											e.printStackTrace();
+										}
 										break;
 									
 								default:System.out.println("Wrong Input");
@@ -78,7 +84,7 @@ public class UserApp {
 							switch(ans)
 							{
 								case 1:	//Claim Creation
-										claimDao.claimCreation(user);
+										claimService.claimCreation(user);
 		
 										break;
 								
@@ -86,6 +92,12 @@ public class UserApp {
 										break;
 										
 								case 3: 
+										try {
+											System.out.println(claimService.viewReport(user));										} 
+										catch (SQLException e) 
+										{
+											e.printStackTrace();
+										}
 										break;
 								
 								default:System.out.println("Wrong Input");
@@ -127,9 +139,17 @@ public class UserApp {
 										break;
 								
 								case 3://Claim Creation
-										claimDao.claimCreation(user);
+										claimService.claimCreation(user);
 										break;
 								case 4:
+										try {
+											
+											System.out.println(claimService.viewReport(user));
+										} 
+										catch (SQLException e) 
+										{
+											e.printStackTrace();
+										}
 										break;
 								
 								default:System.out.println("Wrong Input");
@@ -144,7 +164,7 @@ public class UserApp {
 			System.out.println("Wrong Input!!!.....Try Again");
 			System.out.println("Do u wish to Try Again(yes/no)");
 			ch=sc.next();
-			//ch=ch.toLowerCase();
+			ch=ch.toLowerCase();
 			
 		}
 		

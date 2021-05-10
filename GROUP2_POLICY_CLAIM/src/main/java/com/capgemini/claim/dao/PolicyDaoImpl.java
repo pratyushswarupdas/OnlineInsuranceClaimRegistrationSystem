@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import com.capgemini.claim.bean.Account;
-import com.capgemini.claim.bean.Claim;
 import com.capgemini.claim.bean.Policy;
 import com.capgemini.claim.bean.PolicyDetails;
 import com.capgemini.claim.bean.User;
@@ -33,7 +32,7 @@ public class PolicyDaoImpl implements PolicyDao {
 		
 		
 		Policy p=new Policy();
-		Policy check=new Policy();
+		//Policy check=new Policy();
 		PolicyDetails pd=new PolicyDetails();
 		
 		System.out.println("Enter premium amount");
