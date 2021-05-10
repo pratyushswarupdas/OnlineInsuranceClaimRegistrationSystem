@@ -10,55 +10,56 @@ import javax.persistence.Table;
 public class User {
 	@Id
 	@Column(name="USERNAME")
-	private String UserName;
+	private String userName;
 	
 	@Column(name="PASSWORD")
-	private String Password;
+	private String password;
 	
 	@Column(name="ROLECODE")
-	private int RoleCode;
+	private int roleCode;
 	
-	//CONSTRUCTORS
-	public User(String userName, String password, int roleCode) {
-		super();
-		UserName = userName;
-		Password = password;
-		RoleCode = roleCode;
-	}
+
+	
 
 	public User() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	//GETTER & SETTERS
+	public User(String userName, String password, int roleCode) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.roleCode = roleCode;
+	}
+
 	public String getUserName() {
-		return UserName;
+		return userName;
 	}
 
 	public void setUserName(String userName) {
-		UserName = userName;
+		this.userName = userName;
 	}
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 
 	public int getRoleCode() {
-		return RoleCode;
+		return roleCode;
 	}
 
 	public void setRoleCode(int roleCode) {
-		RoleCode = roleCode;
+		this.roleCode = roleCode;
 	}
-	
-	//TOSTRING
+
 	@Override
 	public String toString() {
-		return "\n User [UserName=" + UserName + ", Password=" + Password + ", RoleCode=" + RoleCode + "]";
+		return "User [userName=" + userName + ", password=" + password + ", roleCode=" + roleCode + "]";
 	}
 
 	

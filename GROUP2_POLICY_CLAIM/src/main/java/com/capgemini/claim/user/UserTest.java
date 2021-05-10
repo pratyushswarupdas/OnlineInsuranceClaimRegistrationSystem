@@ -3,6 +3,7 @@
 
 //helloAliens
 import com.capgemini.claim.bean.User;
+import com.capgemini.claim.customexp.CustomException;
 import com.capgemini.claim.dao.AccountDao;
 import com.capgemini.claim.dao.AccountDaoImpl;
 import com.capgemini.claim.dao.PolicyDao;
@@ -16,7 +17,7 @@ import com.capgemini.claim.service.ImplUserService;
 
 public class UserTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CustomException {
 //		UserDao userDao=new UserDaoImpl();
 		//User user=userDao.loginUser(username, password);
 //		//AccountDao accdao=new AccountDaoImpl();

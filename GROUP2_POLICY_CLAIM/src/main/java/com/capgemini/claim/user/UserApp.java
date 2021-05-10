@@ -3,7 +3,7 @@ package com.capgemini.claim.user;
 import java.sql.SQLException;
 import java.util.Scanner;
 import com.capgemini.claim.bean.User;
-
+import com.capgemini.claim.customexp.CustomException;
 import com.capgemini.claim.dao.PolicyDao;
 import com.capgemini.claim.dao.PolicyDaoImpl;
 import com.capgemini.claim.dao.UserDao;
@@ -35,9 +35,10 @@ public class UserApp {
 		String username=sc.next();
 		System.out.println("\tPassword:");
 		String password=sc.next();
-		user=userDao.loginUser(username, password);
-		if(user!=null)
+		try 
 		{
+			user=userDao.loginUser(username, password);
+		
 			ch="no";
 			switch(user.getRoleCode())
 			{
@@ -158,17 +159,20 @@ public class UserApp {
 							break;	
 							
 			}
-		}
-		else {
-			
-			System.out.println("Wrong Input!!!.....Try Again");
-			System.out.println("Do u wish to Try Again(yes/no)");
-			ch=sc.next();
-			ch=ch.toLowerCase();
-			
+		
+		
+		
+		} catch (CustomException e1) {
+			System.out.println(e1.getMessage());
 		}
 		
+		System.out.println("Wrong Input!!!.....Try Again");
+		System.out.println("Do u wish to Try Again(yes/no)");
+		ch=sc.next();
+		ch=ch.toLowerCase();
+		
 		}while(ch.equals("yes"));
+		
 		
 		//
 		
