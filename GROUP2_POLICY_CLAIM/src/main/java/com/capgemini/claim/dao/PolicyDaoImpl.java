@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
-import com.capgemini.claim.bean.Account;
 import com.capgemini.claim.bean.Policy;
 import com.capgemini.claim.bean.PolicyDetails;
 import com.capgemini.claim.bean.User;
@@ -23,57 +21,31 @@ public class PolicyDaoImpl implements PolicyDao {
 	
 	
 	@Override
-	public void createPolicy(User user) {
-		long bankAccNo;
-		Account checkBankAccNo;
-		double premiumAmount;
-		int questionId;
-		
-		
-		
-		Policy p=new Policy();
-		//Policy check=new Policy();
-		PolicyDetails pd=new PolicyDetails();
-		
-		System.out.println("Enter premium amount");
-		premiumAmount=sc.nextDouble();
-		System.out.println("Enter account no: ");
-		bankAccNo=sc.nextLong();
-		System.out.println("Enter Vehicle type 1 for two wheeler, 2 for HatchBack, 3 for SUV");
-		questionId=sc.nextInt();
+	public void setPolicy(Policy p) {
 		
 	
-		
-	 checkBankAccNo = em.find(Account.class,bankAccNo);
-	 System.out.println(checkBankAccNo);
-	 if(checkBankAccNo.getAccountNumber()==bankAccNo)
-	 { 
-	 	
-	 
-		if(checkBankAccNo.getUserName().equals(user.getUserName()))
-		{	
-			 em.getTransaction().begin();
-			 p.setAccountNumber(bankAccNo);
-			 p.setPolicyPremium(premiumAmount);
-			 em.persist(p);
-			 em.getTransaction().commit();
-		}
+		em.getTransaction().begin();
+		em.persist(p);
+		em.getTransaction().commit();
 
-	 }
-	 em.getTransaction().begin();
-	 pd.setPolicyNumber(p.getPolicyNumber());
-	 pd.setQuestionId(questionId);
-	 em.persist(pd);
-	 em.getTransaction().commit();
-	 	
 }
+	@Override
+	public void setPolicyDetails(PolicyDetails pd,Policy p)
+	{
+		
+		 em.getTransaction().begin();
+		 pd.setPolicyNumber(p.getPolicyNumber());
+		 em.persist(pd);
+		 em.getTransaction().commit();
+		 	
+		
+	}
 	
 	
 	
 	@Override
-	public void viewPolicy(User user) {
-		// TODO Auto-generated method stub
-		
+	public List<Policy> viewPolicy(User user) 
+	{		
 		List<Policy> allPolicyList=new ArrayList<>();
 		IAccountService accService1=new ImplAccountService();
 		List<Long> policyList=accService1.getPolicyByInsuredName(user.getUserName());
@@ -89,15 +61,13 @@ public class PolicyDaoImpl implements PolicyDao {
 					TypedQuery<Policy> query = em.createQuery(qStr, Policy.class);
 					query.setParameter("pnumber", pnumber); 
 					allPolicyList=query.getResultList();
-					System.out.println("\n"+allPolicyList);	  
 				}
-			System.out.println("\n");
 			break;
 			
 			
 			
 			
-		case 2://view all for agents
+		case 2://view all for Claim Handler
 				
 				for(Long pnumber : policyList)
 				{
@@ -105,22 +75,19 @@ public class PolicyDaoImpl implements PolicyDao {
 					TypedQuery<Policy> query = em.createQuery(qStr, Policy.class);
 					query.setParameter("pnumber", pnumber); 
 					allPolicyList=query.getResultList();
-					System.out.println("\n"+allPolicyList);	  
 				}
-				System.out.println("\n");
 				break;
 			
 		case 3:
-				//view all for admin
+				//view all for Claim Adjuster
 				String qStr = "SELECT p FROM Policy p";
 				
 				TypedQuery<Policy> query = em.createQuery(qStr, Policy.class);
 				allPolicyList=query.getResultList();
-				System.out.print("\n"+allPolicyList);
 				break;
 
-		
 		}
+		return allPolicyList;
 		
 		
 	}

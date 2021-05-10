@@ -7,7 +7,8 @@ import com.capgemini.claim.bean.Account;
 import com.capgemini.claim.customexp.CustomException;
 import com.capgemini.jpautil.JPAUtil;
 
-public class AccountDaoImpl implements AccountDao {
+public class AccountDaoImpl implements AccountDao 
+{
 	private EntityManager em = JPAUtil.getEntityManager();
 
 		public void createAccount(Account a) throws CustomException
