@@ -18,6 +18,8 @@ import com.capgemini.claim.bean.Policy;
 import com.capgemini.claim.bean.PolicyDetails;
 import com.capgemini.claim.bean.Questions;
 import com.capgemini.claim.bean.User;
+import com.capgemini.claim.service.IAccountService;
+import com.capgemini.claim.service.ImplAccountService;
 import com.capgemini.jpautil.JPAUtil;
 
 public class ClaimDaoImpl implements ClaimDao {
@@ -30,7 +32,7 @@ public class ClaimDaoImpl implements ClaimDao {
 		long claimAmount = 0;
 		Claim claim = new Claim();
 		Scanner sc = new Scanner(System.in);
-		AccountDao accdao = new AccountDaoImpl();
+		IAccountService accservice = new ImplAccountService();
 		List<Long> allPolicyNumberList=new ArrayList<>();
 		Questions q = new Questions();
 		PolicyDetails policyDetailslist = new PolicyDetails();
@@ -48,9 +50,9 @@ public class ClaimDaoImpl implements ClaimDao {
 		{
 		case 1:
 				//Insured
-				if (accdao.getPolicyByInsuredName(user.getUserName()) != null)
+				if (accservice.getPolicyByInsuredName(user.getUserName()) != null)
 				{
-					for (Long pnumber : accdao.getPolicyByUserName(user.getUserName())) 
+					for (Long pnumber : accservice.getPolicyByUserName(user.getUserName())) 
 					{
 						if (policyNumber == pnumber) 
 						{
@@ -142,9 +144,9 @@ public class ClaimDaoImpl implements ClaimDao {
 			
 		case 2:
 				//agent
-				if (accdao.getPolicyByUserName(user.getUserName()) != null )
+				if (accservice.getPolicyByUserName(user.getUserName()) != null )
 				{
-					for (Long pnumber : accdao.getPolicyByUserName(user.getUserName())) 
+					for (Long pnumber : accservice.getPolicyByUserName(user.getUserName())) 
 					{
 						if (policyNumber == pnumber) 
 						{
@@ -343,14 +345,14 @@ public class ClaimDaoImpl implements ClaimDao {
 	  public List<Claim> viewReport(User user)throws SQLException
 	  {
 			
-		  AccountDao accdao = new AccountDaoImpl();
+		  IAccountService accService = new ImplAccountService();
 		  List<Claim> claimList=new ArrayList<>();
 		  List<Long> policyList=new ArrayList<>();
 		  switch(user.getRoleCode()) {
 	  
 		  case 1:
 			  	//insureduser//
-			  	policyList=accdao.getPolicyByInsuredName(user.getUserName());
+			  	policyList=accService.getPolicyByInsuredName(user.getUserName());
 			  	
 			  	for(Long plList : policyList)
 			  	{
@@ -366,7 +368,7 @@ public class ClaimDaoImpl implements ClaimDao {
 	 
 	  
 		  case 2: //agent
-			  	policyList=accdao.getPolicyByUserName(user.getUserName());
+			  	policyList=accService.getPolicyByUserName(user.getUserName());
 			  	
 			  	for(Long plList : policyList)
 			  	{

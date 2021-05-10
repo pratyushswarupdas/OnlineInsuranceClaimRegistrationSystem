@@ -1,20 +1,17 @@
 package com.capgemini.claim.user;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Scanner;
-
-import com.capgemini.claim.bean.Claim;
 import com.capgemini.claim.bean.User;
 import com.capgemini.claim.dao.ClaimDao;
 import com.capgemini.claim.dao.ClaimDaoImpl;
 import com.capgemini.claim.dao.PolicyDetailsDao;
 import com.capgemini.claim.dao.PolicyDao;
 import com.capgemini.claim.dao.PolicyDaoImpl;
-import com.capgemini.claim.dao.PolicyDetailsDao;
 import com.capgemini.claim.dao.PolicyDetailsDaoImpl;
 import com.capgemini.claim.dao.UserDao;
 import com.capgemini.claim.dao.UserDaoImpl;
+import com.capgemini.claim.service.IUserService;
+import com.capgemini.claim.service.ImplUserService;
 
 public class UserApp {
 	
@@ -28,11 +25,9 @@ public class UserApp {
 		ClaimDao claimDao=new ClaimDaoImpl();
 		PolicyDao policyDao=new PolicyDaoImpl();
 		PolicyDetailsDao policydetailsDao=new PolicyDetailsDaoImpl();
+		IUserService userService=new ImplUserService();
 		
-		/*
-		 * UserDao dao = new UserDaoImpl(); User u = dao.getUserById("Jay");
-		 * System.out.println(u);
-		 */
+	
 		String ch="yes";
 		do {
 		System.out.println("\t*_*_*_*_*_*_*_*_*\tInsurance Claim Registration System\t*_*_*_*_*_*_*_*_*");
@@ -65,13 +60,7 @@ public class UserApp {
 								case 2:	policyDao.viewPolicy(user);
 										break;
 										
-								case 3: try {
-											System.out.println(claimDao.viewReport(user).toString());
-											} 
-											catch (SQLException e) 
-											{
-												e.printStackTrace();
-											}
+								case 3: 
 										break;
 									
 								default:System.out.println("Wrong Input");
@@ -96,14 +85,8 @@ public class UserApp {
 								case 2:	policyDao.viewPolicy(user);
 										break;
 										
-								case 3: try {
-									System.out.println(claimDao.viewReport(user).toString());
-									} 
-									catch (SQLException e) 
-									{
-										e.printStackTrace();
-									}
-								break;
+								case 3: 
+										break;
 								
 								default:System.out.println("Wrong Input");
 								break;
@@ -135,11 +118,12 @@ public class UserApp {
 										int rollcode=sc.nextInt();
 										user_new.setRoleCode(rollcode);
 		
-										String result = userDao.profileCreation(user_new);
+										String result = userService.profileCreation(user_new);
 										System.out.println(result);
 										break;
 								
-								case 2:	policyDao.viewPolicy(user);
+								case 2:	//view policy
+										policyDao.viewPolicy(user);
 										break;
 								
 								case 3://Claim Creation

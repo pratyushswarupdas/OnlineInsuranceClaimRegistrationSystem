@@ -1,6 +1,5 @@
 package com.capgemini.claim.dao;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,12 +12,14 @@ import com.capgemini.claim.bean.Claim;
 import com.capgemini.claim.bean.Policy;
 import com.capgemini.claim.bean.PolicyDetails;
 import com.capgemini.claim.bean.User;
+import com.capgemini.claim.service.IAccountService;
+import com.capgemini.claim.service.ImplAccountService;
 import com.capgemini.jpautil.JPAUtil;
 
 public class PolicyDaoImpl implements PolicyDao {
 	
 	private EntityManager em = JPAUtil.getEntityManager();
-	AccountDao accDao=new AccountDaoImpl();
+	IAccountService accService=new ImplAccountService();
 	Scanner sc=new Scanner(System.in);
 	
 	
@@ -75,8 +76,8 @@ public class PolicyDaoImpl implements PolicyDao {
 		// TODO Auto-generated method stub
 		
 		List<Policy> allPolicyList=new ArrayList<>();
-		AccountDao accdao=new AccountDaoImpl();
-		List<Long> policyList=accdao.getPolicyByInsuredName(user.getUserName());
+		IAccountService accService1=new ImplAccountService();
+		List<Long> policyList=accService1.getPolicyByInsuredName(user.getUserName());
 
 		switch(user.getRoleCode())
 		{
@@ -112,7 +113,6 @@ public class PolicyDaoImpl implements PolicyDao {
 			
 		case 3:
 				//view all for admin
-				
 				String qStr = "SELECT p FROM Policy p";
 				
 				TypedQuery<Policy> query = em.createQuery(qStr, Policy.class);
