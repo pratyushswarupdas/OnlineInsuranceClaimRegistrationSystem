@@ -127,13 +127,13 @@ public class UserApp {
 									
 										System.out.println("enter new username");
 										username=sc.next();
-										user.setUserName(username);
+										user_new.setUserName(username);
 										System.out.println("enter new password");
 										password=sc.next();
-										user.setPassword(password);
+										user_new.setPassword(password);
 										System.out.println("enter new RollCode (1 , 2 , 3)");
 										int rollcode=sc.nextInt();
-										user.setRoleCode(rollcode);
+										user_new.setRoleCode(rollcode);
 		
 										String result = userDao.profileCreation(user_new);
 										System.out.println(result);
