@@ -11,8 +11,8 @@
 			<property name="javax.persistence.jdbc.user" value="scott_new" />
 			<property name="javax.persistence.jdbc.password" value="tiger" />
 			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />
-			<property name="hibernate.show_sql" value="true"/> <!-- Will show SQL query in  -->
 			<property name="hibernate.hbm2ddl.auto" value="update"/> <!-- For Auto Create/ Update Table -->
+			<!-- <property name="hibernate.show_sql" value="true"/> Will show SQL query in  -->
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -4,18 +4,12 @@
 //helloAliens
 import com.capgemini.claim.bean.User;
 import com.capgemini.claim.customexp.CustomException;
-import com.capgemini.claim.dao.AccountDao;
-import com.capgemini.claim.dao.AccountDaoImpl;
-import com.capgemini.claim.dao.PolicyDao;
-import com.capgemini.claim.dao.PolicyDaoImpl;
-import com.capgemini.claim.dao.UserDao;
-import com.capgemini.claim.dao.UserDaoImpl;
 import com.capgemini.claim.service.IAccountService;
 import com.capgemini.claim.service.IUserService;
 import com.capgemini.claim.service.ImplAccountService;
 import com.capgemini.claim.service.ImplUserService;
 
-public class UserTest {
+public class TestApp {
 
 	public static void main(String[] args) throws CustomException {
 //		UserDao userDao=new UserDaoImpl();
@@ -53,7 +47,7 @@ public class UserTest {
 			IAccountService a=new ImplAccountService();
 			a.createAccount(user,null);
 		
-		
+		sc.close();
 	}
 
 }

@@ -12,6 +12,7 @@ import com.capgemini.claim.bean.Claim;
 import com.capgemini.claim.bean.PolicyDetails;
 import com.capgemini.claim.bean.Questions;
 import com.capgemini.claim.bean.User;
+import com.capgemini.claim.customexp.CustomException;
 import com.capgemini.claim.dao.ClaimDao;
 import com.capgemini.claim.dao.ClaimDaoImpl;
 import com.capgemini.jpautil.JPAUtil;
@@ -23,7 +24,7 @@ public class ImplClaimService implements IClaimService {
 	private ClaimDao claimDao=new ClaimDaoImpl();
 	
 	@Override
-	public void claimCreation(User user) {
+	public void claimCreation(User user) throws CustomException {
 	
 		long claimAmount = 0;
 		Claim claim = new Claim();
@@ -130,7 +131,7 @@ public class ImplClaimService implements IClaimService {
 				break;
 			
 		case 2:
-				//agent
+				//Claim_Handler
 				if (accservice.getPolicyByUserName(user.getUserName()) != null )
 				{
 					for (Long pnumber : accservice.getPolicyByUserName(user.getUserName())) 
@@ -214,12 +215,18 @@ public class ImplClaimService implements IClaimService {
 				break;
 			
 		case 3:
-				//admin
+				//Claim_Adjuster
 				String qStr = "SELECT p.policyNumber FROM Policy p";
 				
 				TypedQuery<Long> query = em.createQuery(qStr, Long.class);
 				allPolicyNumberList=query.getResultList();
-				
+				if(allPolicyNumberList == null) 
+				{
+					System.out.println("allPolicyNumberList is empty");
+					sc.close();
+					throw new CustomException();
+				}
+
 				if (allPolicyNumberList!= null)
 				{
 					for (Long pnumber : allPolicyNumberList) 

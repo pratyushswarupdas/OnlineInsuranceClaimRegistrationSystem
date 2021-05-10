@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import com.capgemini.claim.bean.Claim;
 import com.capgemini.claim.bean.User;
+import com.capgemini.claim.customexp.CustomException;
 import com.capgemini.claim.service.IAccountService;
 import com.capgemini.claim.service.ImplAccountService;
 import com.capgemini.jpautil.JPAUtil;
@@ -17,7 +18,7 @@ public class ClaimDaoImpl implements ClaimDao {
 	private EntityManager em = JPAUtil.getEntityManager();
 
 	@Override
-	public void claimCreation(Claim claim) 
+	public void claimCreation(Claim claim) throws CustomException
 	{
 		em.getTransaction().begin();
 		em.persist(claim);

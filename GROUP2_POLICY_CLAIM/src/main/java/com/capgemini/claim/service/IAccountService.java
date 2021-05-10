@@ -9,10 +9,7 @@ import com.capgemini.claim.customexp.CustomException;
 public interface IAccountService {
 	
 	public abstract List<Long> getPolicyByUserName(String username);
-
-//	public abstract void addAccount(Account account);
 	public abstract void createAccount(User user,Account a)throws CustomException;
-
 	public abstract List<Long> getPolicyByInsuredName(String username);
 
 }
