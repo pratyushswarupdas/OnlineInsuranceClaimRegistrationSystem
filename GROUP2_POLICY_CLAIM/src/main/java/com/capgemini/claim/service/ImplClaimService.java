@@ -92,10 +92,12 @@ public class ImplClaimService implements IClaimService {
 							System.out.println("Claim Request Initiated");
 							temp=1;
 						}
-						
+						System.out.println("after if");
 					}
+					System.out.println("after for loop");
 					
 				}
+				System.out.println("before break");
 				
 				break;
 			
@@ -210,12 +212,19 @@ public class ImplClaimService implements IClaimService {
 							claimDao.claimCreation(claim);
 							System.out.println("Claim Request Initiated");
 							temp=1;
+							if(temp==1)
+							{
+								break;
+							}
+							
 			
 						}
-
+						System.out.println("after if");
 					}
+					System.out.println("after for loop");
 					
 				}
+				System.out.println("before break");
 				
 				break;
 			

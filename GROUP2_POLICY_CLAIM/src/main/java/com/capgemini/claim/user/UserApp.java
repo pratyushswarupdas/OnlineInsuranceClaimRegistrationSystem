@@ -22,6 +22,8 @@ public class UserApp {
 	private static IClaimService claimService=new ImplClaimService();
 	private static IAccountService accountService = new ImplAccountService();
 	
+	private static String ch="No";
+	
 	public static void main(String[] args) {
 		
 		User user=new User();
@@ -58,14 +60,14 @@ public class UserApp {
 			{
 				System.out.println(e1.getMessage());
 				
-//				  System.out.println("Do u wish to Try Again(yes/no)"); 
-//				  ch=sc.next();
-//				  ch=ch.toLowerCase();
+				  System.out.println("Do u wish to Try Again(yes/no)"); 
+				  ch=sc.next();
+				  ch=ch.toLowerCase();
 				 
 			}
-			System.out.println("Do u wish to Re-Login(yes/no)");
-			ch=sc.next();
-			ch=ch.toLowerCase();
+//			System.out.println("Do u wish to Re-Login(yes/no)");
+//			ch=sc.next();
+//			ch=ch.toLowerCase();
 		}while(ch.equals("yes"));
 
 		sc.close();
@@ -80,10 +82,9 @@ public class UserApp {
 	{
 		int ans=0;
 		
-		String ch="No";
+		
 		System.out.println("Welcome Insured User");
-		do 
-		{
+
 	        System.out.println("1. View My Polices");
 	        System.out.println("2. Want To Make A Claim");
 	        System.out.println("3. View My Claim Reports");
@@ -119,13 +120,11 @@ public class UserApp {
 	                    
 	                
 	            default:System.out.println("Wrong Input");
-	            break;
+	            		break;
 	        }		
-	        System.out.println("Do You Wish To See The Menu Place Again(yes/no)");
-			ch=sc.next();
-			ch=ch.toLowerCase();
+	       
 			
-		}while(ch.equals("yes"));
+		
 	}
 	
 	private static void claimHandlerLogin(User user2) 
