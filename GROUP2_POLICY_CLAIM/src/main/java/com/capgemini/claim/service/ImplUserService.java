@@ -14,8 +14,8 @@ public class ImplUserService implements IUserService {
 	
 	public User loginUser(String username,String password)throws CustomException
 	{
-	User user_1=userDao.loginUser(username, password);
-	return user_1;
+		User user_1=userDao.loginUser(username, password);
+		return user_1;
 	}
 		
 

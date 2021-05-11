@@ -27,13 +27,13 @@ public class ImplAccountService implements IAccountService {
 		String queryString = "select a from Account a where a.userName=:pusername ";
 		TypedQuery<Account> querystr = em.createQuery(queryString, Account.class);
 		querystr.setParameter("pusername", username);
-		accList = querystr.getResultList();
+		accList.addAll(querystr.getResultList()) ;
 
 		for (Account accNo : accList) {
 			String qStr = "SELECT p.policyNumber FROM Policy p WHERE p.accountNumber=:accNo";
 			TypedQuery<Long> qr = em.createQuery(qStr, Long.class);
 			qr.setParameter("accNo", accNo.getAccountNumber());
-			polList = qr.getResultList();
+			polList.addAll(qr.getResultList());
 
 		}
 		// System.out.println(polList);
@@ -49,13 +49,13 @@ public class ImplAccountService implements IAccountService {
 		String queryString = "select a from Account a where a.insuredName=:pInsuredName ";
 		TypedQuery<Account> querystr = em.createQuery(queryString, Account.class);
 		querystr.setParameter("pInsuredName", insuredName);
-		accList = querystr.getResultList();
+		accList.addAll(querystr.getResultList()) ;
 
 		for (Account accNo : accList) {
 			String qStr = "SELECT p.policyNumber FROM Policy p WHERE p.accountNumber=:accNo";
 			TypedQuery<Long> qr = em.createQuery(qStr, Long.class);
 			qr.setParameter("accNo", accNo.getAccountNumber());
-			polList = qr.getResultList();
+			polList.addAll(qr.getResultList());
 
 		}
 		// System.out.println(polList);

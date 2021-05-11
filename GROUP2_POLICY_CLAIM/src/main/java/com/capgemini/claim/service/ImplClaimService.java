@@ -1,6 +1,5 @@
 package com.capgemini.claim.service;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -48,7 +47,7 @@ public class ImplClaimService implements IClaimService {
 				//Insured
 				if (accservice.getPolicyByInsuredName(user.getUserName()) != null)
 				{
-					for (Long pnumber : accservice.getPolicyByUserName(user.getUserName())) 
+					for (Long pnumber : accservice.getPolicyByInsuredName(user.getUserName())) 
 					{
 						if (policyNumber == pnumber) 
 						{
@@ -238,7 +237,7 @@ public class ImplClaimService implements IClaimService {
 		
 	}
 	@Override
-	 public List<Claim> viewReport(User user)throws SQLException
+	 public List<Claim> viewReport(User user)
 	 {
 		 return claimDao.viewReport(user);
 	 }

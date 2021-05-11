@@ -1,7 +1,9 @@
 package com.capgemini.claim.user;
 
-import java.sql.SQLException;
 import java.util.Scanner;
+
+import org.apache.log4j.PropertyConfigurator;
+
 import com.capgemini.claim.bean.Account;
 import com.capgemini.claim.bean.User;
 import com.capgemini.claim.customexp.CustomException;
@@ -21,15 +23,21 @@ public class UserApp {
 	private static IUserService userService=new ImplUserService();
 	private static IClaimService claimService=new ImplClaimService();
 	private static IAccountService accountService = new ImplAccountService();
+	/**
+	* Online Insurance Claim System
+	*
+	* @author  Capgemini Batch-1 Group-2 (Pratyush Swarup Das, Abhishek Dnyaneshwar Bhambure, Kunal Verma, Digvijay S Redekar, Arpit Kumar)
+	* 
+	*/
 	
-	private static String ch="No";
-	
+	//Main
 	public static void main(String[] args) {
+		PropertyConfigurator.configure("src\\main\\resources\\log4j.properties");
 		
 		User user=new User();
 		String ch="No";
-//		do 
-//		{
+		do 
+		{
 			System.out.print("==========================\t                                    \t=========================="
 							+"\n<><><><><><><><><><><><><>\tInsurance Claim Registration System\t<><><><><><><><><><><><><>"
 							+"\n==========================\t                                   \t==========================");
@@ -60,15 +68,15 @@ public class UserApp {
 			{
 				System.out.println(e1.getMessage());
 				
-//				  System.out.println("Do u wish to Try Again(yes/no)"); 
-//				  ch=sc.next();
-//				  ch=ch.toLowerCase();
+				  System.out.println("Do u wish to Try Again(yes/no)"); 
+				  ch=sc.next();
+				  ch=ch.toLowerCase();
 				 
 			}
 //			System.out.println("Do u wish to Re-Login(yes/no)");
 //			ch=sc.next();
 //			ch=ch.toLowerCase();
-//		}while(ch.equals("yes"));
+		}while(ch.equals("yes"));
 
 		sc.close();
 		System.exit(0);
@@ -77,7 +85,6 @@ public class UserApp {
 
 
 	//User_Flow
-
 	private static void insuredLogin(User user2) 
 	{
 		int ans=0;
@@ -94,8 +101,6 @@ public class UserApp {
 	        {
 	            case 1: //View Policies
     					System.out.println(policyService.viewPolicy(user2));
-
-	    
 	                    break;
 	            
 	            case 2: //Claim Creation
@@ -108,23 +113,14 @@ public class UserApp {
 	                    break;
 	                    
 	            case 3: //view Claim
-		            	try 
-	            		{
-	            			System.out.println(claimService.viewReport(user2));                                      
-	            		} 
-	            		catch (SQLException e) 
-	            		{
-	            			e.getMessage();
-	            		}
+	            		System.out.println(claimService.viewReport(user2));                                      
 	            		break;
 	                    
 	                
 	            default:System.out.println("Wrong Input");
 	            		break;
 	        }		
-	       
-			
-		
+	
 	}
 	
 	private static void claimHandlerLogin(User user2) 
@@ -132,11 +128,9 @@ public class UserApp {
 		double premiumAmount;
 		long bankAccNo;
 		int questionId;
-		String ch="No";
 		int ans=0;
 		System.out.println("Welcome Claim Handler User");
-//		do 
-//		{	
+	
 			System.out.println("1. Create A New Account");
 			System.out.println("2. Create A New Policy");
 	        System.out.println("3. View My Customer's Polices");
@@ -146,26 +140,25 @@ public class UserApp {
 	        ans=sc.nextInt();
 	        switch(ans)
 	        {
-	        	case 1: //Create_Account
-		            	Account a = new Account();
-		                a.setUserName(user2.getUserName());
-		                System.out.println("enter Bank acc no");
-		                long tempAccNumber = sc.nextLong();
-		                a.setAccountNumber(tempAccNumber);
-		                System.out.println("Enter the user for whom you want to set Bank Account details for");
-		                String tempInsuredUser = sc.next();
-		                a.setInsuredName(tempInsuredUser);
-		                
-		                try 
-		                {
-		                    accountService.createAccount(user2,a);
-		                }
-		                catch(CustomException e) 
-		                {
-		                    System.out.println(e.getMessage());
-		                }
-		                
-		                break;
+	                
+		        case 1: //Create_Account
+	            	Account a = new Account();
+	                a.setUserName(user2.getUserName());
+	                System.out.println("enter Bank acc no");
+	                long tempAccNumber = sc.nextLong();
+	                a.setAccountNumber(tempAccNumber);
+	                System.out.println("Enter the user for whom you want to set Bank Account details for");
+	                String tempInsuredUser = sc.next();
+	                a.setInsuredName(tempInsuredUser);
+	                try 
+	                {
+	                    accountService.createAccount(user2,a);
+	                }
+	                catch(CustomException e) 
+	                {
+	                    System.out.println(e.getMessage());
+	                }
+	                break;
 	                
 	            case 2: //Create Policies
 		            	System.out.println("Enter premium amount");
@@ -175,12 +168,10 @@ public class UserApp {
 		        		System.out.println("Enter Vehicle type 1 for two wheeler, 2 for HatchBack, 3 for SUV");
 		        		questionId=sc.nextInt();
 		        		policyService.createPolicy(user2,bankAccNo,premiumAmount,questionId);
-	
 		        		break;
 	                    
 	            case 3: //View Policies
 	    				System.out.println(policyService.viewPolicy(user2));
-	    				
 	                    break;
 	            
 	            case 4: //Claim Creation
@@ -193,26 +184,13 @@ public class UserApp {
 		                break;
 	                    
 	            case 5: //view Claim
-	            		try 
-	            		{
 	            			System.out.println(claimService.viewReport(user2));                                      
-	            		} 
-	            		catch (SQLException e) 
-	            		{
-	            			e.getMessage();
-	            		}
 	            		break;
-	                   
-	            
+
 	            default:
 	            		System.out.println("Wrong Input");
 	            		break;
 	        }	
-//	        System.out.println("Do You Wish To See The Menu Place Again(yes/no)");
-//			ch=sc.next();
-//			ch=ch.toLowerCase();
-//			
-//		}while(ch.equals("yes"));
 	}
 	
 	
@@ -222,11 +200,9 @@ public class UserApp {
 		long bankAccNo;
 		int questionId;
     	String username,password;
-    	String ch="No";
     	int ans=0;
     	System.out.println("Welcome Claim Handler User");
-//    	do 
-//    	{
+
 	        System.out.println("1. Create A New Profile");
 	        System.out.println("2. Create A New Account");
 	        System.out.println("3. Create A New Policy");
@@ -308,14 +284,7 @@ public class UserApp {
 		                break;
 	                    
 	            case 6://View_All_Claim_Report
-		            	try 
-		        		{
-		        			System.out.println(claimService.viewReport(user2));                                      
-		        		} 
-		        		catch (SQLException e) 
-		        		{
-		        			e.printStackTrace();
-		        		}
+		        		System.out.println(claimService.viewReport(user2));                                      
 		        		break;
 	                    
 	            default:
@@ -323,11 +292,6 @@ public class UserApp {
 	            		break;
 	        }		
 		
-//	        System.out.println("Do You Wish To See The Menu Place Again(yes/no)");
-//	        ch=sc.next();
-//	        ch=ch.toLowerCase();
-//		
-//    	}while(ch.equals("yes"));
 	}
 	
 }

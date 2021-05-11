@@ -1,5 +1,6 @@
 package com.capgemini.claim.customexp;
 
+@SuppressWarnings("serial")
 public class CustomException extends Exception 
 {
 

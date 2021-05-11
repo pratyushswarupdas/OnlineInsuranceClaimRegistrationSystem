@@ -43,6 +43,7 @@ public class ImplPolicyService implements IPolicyService {
 					}
 		
 				 }
+				break;
 		case 3:
 			if(checkBankAccNo.getAccountNumber()==bankAccNo)
 			 { 
@@ -55,6 +56,7 @@ public class ImplPolicyService implements IPolicyService {
 					 policyDao.setPolicyDetails(pd,p);
 				
 			 }
+			break;
 	
 		}
 	 
