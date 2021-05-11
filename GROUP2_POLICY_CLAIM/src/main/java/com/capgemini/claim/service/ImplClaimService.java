@@ -22,19 +22,19 @@ public class ImplClaimService implements IClaimService {
 	
 	private EntityManager em = JPAUtil.getEntityManager();
 	private ClaimDao claimDao=new ClaimDaoImpl();
+	private Scanner sc = new Scanner(System.in);
+
 	
 	@Override
 	public void claimCreation(User user) throws CustomException {
 	
 		long claimAmount = 0;
 		Claim claim = new Claim();
-		Scanner sc = new Scanner(System.in);
 		IAccountService accservice = new ImplAccountService();
 		List<Long> allPolicyNumberList=new ArrayList<>();
 		Questions q = new Questions();
 		PolicyDetails policyDetailslist = new PolicyDetails();
 		int qId = 0;
-		int answer;
 		int temp=0;
 		
 		//Entering and checking for Policy Details
@@ -84,39 +84,8 @@ public class ImplClaimService implements IClaimService {
 							policyDetailslist = querystr.getSingleResult();
 							qId = policyDetailslist.getQuestionId();
 							q = em.find(Questions.class, qId);
-							System.out.println("Please Answer few Questions: 1 for Yes, 2 for No!");
-							System.out.println(q.getQues_1());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 1000;
-							}
-	
-							System.out.println(q.getQues_2());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 2000;
-							}
-							System.out.println(q.getQues_3());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 2000;
-							}
-							System.out.println(q.getQues_4());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 4000;
-							}
-							System.out.println(q.getQues_5());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 10000;
-							}
-	
+							
+							claimAmount=calcClaimAmount( q);
 							claim.setClaimAmount(claimAmount);
 	
 							claimDao.claimCreation(claim);
@@ -170,39 +139,8 @@ public class ImplClaimService implements IClaimService {
 							policyDetailslist = querystr.getSingleResult();
 							qId = policyDetailslist.getQuestionId();
 							q = em.find(Questions.class, qId);
-							System.out.println("Please Answer few Questions: 1 for Yes, 2 for No!");
-							System.out.println(q.getQues_1());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 1000;
-							}
-	
-							System.out.println(q.getQues_2());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 2000;
-							}
-							System.out.println(q.getQues_3());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 2000;
-							}
-							System.out.println(q.getQues_4());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 4000;
-							}
-							System.out.println(q.getQues_5());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 10000;
-							}
-	
+							
+							claimAmount=calcClaimAmount( q);
 							claim.setClaimAmount(claimAmount);
 	
 							claimDao.claimCreation(claim);
@@ -264,38 +202,8 @@ public class ImplClaimService implements IClaimService {
 							policyDetailslist = querystr.getSingleResult();
 							qId = policyDetailslist.getQuestionId();
 							q = em.find(Questions.class, qId);
-							System.out.println("Please Answer few Questions: 1 for Yes, 2 for No!");
-							System.out.println(q.getQues_1());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 1000;
-							}
-	
-							System.out.println(q.getQues_2());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 2000;
-							}
-							System.out.println(q.getQues_3());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 2000;
-							}
-							System.out.println(q.getQues_4());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 4000;
-							}
-							System.out.println(q.getQues_5());
-							answer = sc.nextInt();
-							if (answer == 1) 
-							{
-								claimAmount = claimAmount + 10000;
-							}
+							
+							claimAmount=calcClaimAmount( q);
 	
 							claim.setClaimAmount(claimAmount);
 	
@@ -325,7 +233,128 @@ public class ImplClaimService implements IClaimService {
 	 {
 		 return claimDao.viewReport(user);
 	 }
+	@Override
+	public long calcClaimAmount(Questions q) 
+	{
+		int answer=0;
+		long claimAmount=0;
+		
+		switch(q.getQustId())
+		{
+		
+		case 1://Two Wheeler
+				System.out.println("Please Answer few Questions: 1 for Yes, 2 for No!");
+				System.out.println(q.getQues_1());
+				answer = sc.nextInt();
+			
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 1000;
+				}
 	
+				System.out.println(q.getQues_2());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 2000;
+				}
+				System.out.println(q.getQues_3());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 2000;
+				}
+				System.out.println(q.getQues_4());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 1200;
+				}
+				System.out.println(q.getQues_5());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 10000;
+				}
+					break;
+			
+		case 2://LUV
+				System.out.println("Please Answer few Questions: 1 for Yes, 2 for No!");
+				System.out.println(q.getQues_1());
+				answer = sc.nextInt();
+			
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 3000;
+				}
+	
+				System.out.println(q.getQues_2());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 15000;
+				}
+				System.out.println(q.getQues_3());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 15000;
+				}
+				System.out.println(q.getQues_4());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 8000;
+				}
+				System.out.println(q.getQues_5());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 100000;
+				}
+				break;
+
+		case 3://SUV
+				System.out.println("Please Answer few Questions: 1 for Yes, 2 for No!");
+				System.out.println(q.getQues_1());
+				answer = sc.nextInt();
+			
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 5000;
+				}
+	
+				System.out.println(q.getQues_2());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 20000;
+				}
+				System.out.println(q.getQues_3());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 20000;
+				}
+				System.out.println(q.getQues_4());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 10000;
+				}
+				System.out.println(q.getQues_5());
+				answer = sc.nextInt();
+				if (answer == 1) 
+				{
+					claimAmount = claimAmount + 200000;
+				}
+				break;
+
+		}
+		
+		return claimAmount;
+	}
+
 	
 
 }
