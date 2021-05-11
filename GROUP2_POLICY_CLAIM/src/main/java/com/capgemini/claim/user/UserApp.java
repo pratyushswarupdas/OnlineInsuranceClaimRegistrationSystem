@@ -28,8 +28,8 @@ public class UserApp {
 		
 		User user=new User();
 		String ch="No";
-		do 
-		{
+//		do 
+//		{
 			System.out.print("==========================\t                                    \t=========================="
 							+"\n<><><><><><><><><><><><><>\tInsurance Claim Registration System\t<><><><><><><><><><><><><>"
 							+"\n==========================\t                                   \t==========================");
@@ -60,15 +60,15 @@ public class UserApp {
 			{
 				System.out.println(e1.getMessage());
 				
-				  System.out.println("Do u wish to Try Again(yes/no)"); 
-				  ch=sc.next();
-				  ch=ch.toLowerCase();
+//				  System.out.println("Do u wish to Try Again(yes/no)"); 
+//				  ch=sc.next();
+//				  ch=ch.toLowerCase();
 				 
 			}
 //			System.out.println("Do u wish to Re-Login(yes/no)");
 //			ch=sc.next();
 //			ch=ch.toLowerCase();
-		}while(ch.equals("yes"));
+//		}while(ch.equals("yes"));
 
 		sc.close();
 		System.exit(0);
@@ -135,8 +135,8 @@ public class UserApp {
 		String ch="No";
 		int ans=0;
 		System.out.println("Welcome Claim Handler User");
-		do 
-		{	
+//		do 
+//		{	
 			System.out.println("1. Create A New Account");
 			System.out.println("2. Create A New Policy");
 	        System.out.println("3. View My Customer's Polices");
@@ -208,11 +208,11 @@ public class UserApp {
 	            		System.out.println("Wrong Input");
 	            		break;
 	        }	
-	        System.out.println("Do You Wish To See The Menu Place Again(yes/no)");
-			ch=sc.next();
-			ch=ch.toLowerCase();
-			
-		}while(ch.equals("yes"));
+//	        System.out.println("Do You Wish To See The Menu Place Again(yes/no)");
+//			ch=sc.next();
+//			ch=ch.toLowerCase();
+//			
+//		}while(ch.equals("yes"));
 	}
 	
 	
@@ -225,8 +225,8 @@ public class UserApp {
     	String ch="No";
     	int ans=0;
     	System.out.println("Welcome Claim Handler User");
-    	do 
-    	{
+//    	do 
+//    	{
 	        System.out.println("1. Create A New Profile");
 	        System.out.println("2. Create A New Account");
 	        System.out.println("3. Create A New Policy");
@@ -323,11 +323,11 @@ public class UserApp {
 	            		break;
 	        }		
 		
-	        System.out.println("Do You Wish To See The Menu Place Again(yes/no)");
-	        ch=sc.next();
-	        ch=ch.toLowerCase();
-		
-    	}while(ch.equals("yes"));
+//	        System.out.println("Do You Wish To See The Menu Place Again(yes/no)");
+//	        ch=sc.next();
+//	        ch=ch.toLowerCase();
+//		
+//    	}while(ch.equals("yes"));
 	}
 	
 }
