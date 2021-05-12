@@ -65,10 +65,4 @@ public class Policy {
 		return "\n Policy [policyNumber=" + policyNumber + ", policyPremium=" + policyPremium + ", accountNumber="
 				+ accountNumber + "]";
 	}
-	
-	
-	
-	
-	
-
 }
